@@ -1,8 +1,9 @@
 import React from "react";
-import styled from "styled-components";
 import { StyleSheet, Text, View, Image } from "react-native";
-import { Card, Title, Paragraph, Button } from "react-native-paper";
+import { Title } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
+import { Favourite } from "../../../components/favourites/favourites.component";
+
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
 import { Spacer } from "../../../components/spacer/spacer.component";
@@ -13,7 +14,6 @@ import {
   Section,
   SectionEnd,
   Rating,
-  Icon,
   Address,
 } from "./restaurant-info-card.styles";
 
@@ -28,19 +28,28 @@ export const RestaurantInfo = ({ restaurant = {} }) => {
     isOpenNow = true,
     rating = 4,
     isClosedTemp = true,
+    placeId,
   } = restaurant;
 
   const ratingArr = Array.from(new Array(Math.floor(rating)));
 
   return (
     <RestaurantCard elevation={5}>
-      <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
+      <View>
+        <Favourite restaurant={restaurant} />
+        <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
+      </View>
       <Info>
         <Title>{name}</Title>
         <Section>
           <Rating>
-            {ratingArr.map(() => (
-              <SvgXml xml={star} width={20} height={20} />
+            {ratingArr.map((_, i) => (
+              <SvgXml
+                key={`star-${placeId}-${i}`}
+                xml={star}
+                width={20}
+                height={20}
+              />
             ))}
           </Rating>
           <SectionEnd>
