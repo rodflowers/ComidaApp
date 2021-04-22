@@ -9,6 +9,8 @@ import store from "./src/redux/store";
 
 import { Navigation } from "./src/infrastructure/navigation";
 
+import { FirebaseAuthState } from "./src/components/utility/firebase-auth-state.component";
+
 import {
   useFonts as useOwsald,
   Oswald_400Regular,
@@ -40,7 +42,9 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <Navigation />
+          <FirebaseAuthState>
+            <Navigation />
+          </FirebaseAuthState>
         </Provider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />

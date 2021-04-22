@@ -21,7 +21,6 @@ export const Favourite = ({ restaurant }) => {
   const favouriteRedux = useSelector((state) => state.favouriteStore);
   const { favourites } = favouriteRedux;
 
-  console.log("IS FAVOURITE => ", favourites);
   const isFavourite = favourites.find((r) => r.placeId === restaurant.placeId);
   return (
     <FavouriteButton
