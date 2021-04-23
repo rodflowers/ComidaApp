@@ -19,18 +19,18 @@ export const FavouritesBar = ({ favourites, onNavigate }) => {
       </Spacer>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {favourites.map((restaurant) => {
-          const key = restaurant.name;
+        {favourites.map((item) => {
+          const key = item.name;
           return (
             <Spacer key={key} position="left" size="medium">
               <TouchableOpacity
                 onPress={() =>
                   onNavigate("RestaurantDetail", {
-                    restaurant,
+                    item,
                   })
                 }
               >
-                <CompactRestaurantInfo restaurant={restaurant} />
+                <CompactRestaurantInfo restaurant={item} />
               </TouchableOpacity>
             </Spacer>
           );

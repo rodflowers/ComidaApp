@@ -18,16 +18,17 @@ const FavouriteButton = styled(TouchableOpacity)`
 
 export const Favourite = ({ restaurant }) => {
   const disptach = useDispatch();
-  const favouriteRedux = useSelector((state) => state.favouriteStore);
-  const { favourites } = favouriteRedux;
+  const { favourites } = useSelector((state) => state.favouriteStore);
+  const { user } = useSelector((state) => state.authStore);
 
   const isFavourite = favourites.find((r) => r.placeId === restaurant.placeId);
+
   return (
     <FavouriteButton
       onPress={() =>
         !isFavourite
-          ? disptach(addFavourite(restaurant))
-          : disptach(deleteFavourite(restaurant))
+          ? disptach(addFavourite(restaurant, user.uid))
+          : disptach(deleteFavourite(restaurant, user.uid))
       }
     >
       <AntDesign

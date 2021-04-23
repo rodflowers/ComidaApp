@@ -22,16 +22,18 @@ export const RestaurantScreen = ({ navigation }) => {
   const favouriteRedux = useSelector((state) => state.favouriteStore);
   const { favourites } = favouriteRedux;
 
+  const { user } = useSelector((state) => state.authStore);
+
   const [isToggled, setIsToggled] = useState(false);
 
   useEffect(() => {
     const locationString = `${Location.lat},${Location.lng}`;
-    dispatch(loadFavourite());
+    dispatch(loadFavourite(user.uid));
     dispatch(getRestaurants(locationString));
     return () => {
       // cleanup;
     };
-  }, [dispatch, Location]);
+  }, [dispatch, Location, user]);
 
   return (
     <SafeArea>

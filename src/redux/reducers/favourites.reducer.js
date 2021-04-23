@@ -1,10 +1,10 @@
 import * as actionType from "../constants/favourites.constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const saveFavourites = async (value) => {
+const saveFavourites = async (value, uid) => {
   try {
     const jsonValue = JSON.stringify(value);
-    await AsyncStorage.setItem("@favourites", jsonValue);
+    await AsyncStorage.setItem(`@favourites2-${uid}`, jsonValue);
   } catch (e) {
     console.log("error storing", e);
   }
@@ -13,11 +13,14 @@ const saveFavourites = async (value) => {
 export const favouritesReducer = (state = { favourites: [] }, action) => {
   switch (action.type) {
     case actionType.ADD_FAVOURITES_REQUEST:
-      saveFavourites([...state.favourites, action.payload]);
+      saveFavourites(
+        [...state.favourites, action.payload.restaurant],
+        action.payload.uid
+      );
       return {
         ...state,
         loading: true,
-        favourites: [...state.favourites, action.payload],
+        favourites: [...state.favourites, action.payload.restaurant],
       };
     case actionType.DELETE_FAVOURITES_REQUEST:
       const newFavourites = state.favourites.filter(

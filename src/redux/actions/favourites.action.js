@@ -1,9 +1,12 @@
 import * as actionType from "../constants/favourites.constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const addFavourite = (restaurant) => (dispatch) => {
+export const addFavourite = (restaurant, uid) => (dispatch) => {
   try {
-    dispatch({ type: actionType.ADD_FAVOURITES_REQUEST, payload: restaurant });
+    dispatch({
+      type: actionType.ADD_FAVOURITES_REQUEST,
+      payload: { restaurant, uid },
+    });
 
     dispatch({ type: actionType.ADD_FAVOURITES_SUCCESS });
   } catch (err) {
@@ -34,12 +37,12 @@ export const deleteFavourite = (restaurant) => (dispatch) => {
     });
   }
 };
-export const loadFavourite = () => (dispatch) => {
+export const loadFavourite = (uid) => (dispatch) => {
   dispatch({
     type: actionType.LOAD_FAVOURITES_REQUEST,
   });
 
-  AsyncStorage.getItem("@favourites")
+  AsyncStorage.getItem(`@favourites2-${uid}`)
     .then((storage) => {
       storage !== null
         ? dispatch({
