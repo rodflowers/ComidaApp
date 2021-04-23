@@ -1,6 +1,6 @@
 import React from "react";
 import { RestaurantsNavigator } from "../navigation/restaurants.navigator";
-import { SettingsScreen } from "../../features/restaurants/screens/setting.screen";
+import { SettingsNavigator } from "../navigation/settings.navigation";
 import { MapScreen } from "../../features/restaurants/screens/map.screen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
@@ -32,7 +32,7 @@ export const AppNavigator = () => {
     >
       <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
       <Tab.Screen name="Map" component={MapScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen name="Settings" component={SettingsNavigator} />
     </Tab.Navigator>
   );
 };
